@@ -1,0 +1,91 @@
+<Window x:Class="StudentLibraryWPF.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:StudentLibraryWPF.ViewModels"
+        mc:Ignorable="d"
+        Title="Студенческая библиотека"
+        Height="500" Width="800">
+  <Window.DataContext>
+    <vm:MainViewModel/>
+  </Window.DataContext>
+  <Grid>
+    <TabControl>
+      <!-- Книги -->
+      <TabItem Header="Книги">
+        <StackPanel Margin="10">
+          <Button Content="Добавить книгу"
+                  Width="120"
+                  Command="{Binding AddBookCommand}"/>
+          <DataGrid ItemsSource="{Binding Books}"
+                    AutoGenerateColumns="False"
+                    Margin="0,10,0,0"
+                    IsReadOnly="True">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+              <DataGridTextColumn Header="Author" Binding="{Binding Author}"/>
+              <DataGridTextColumn Header="Year" Binding="{Binding Year}"/>
+              <DataGridCheckBoxColumn Header="Available"
+                                      Binding="{Binding IsAvailable}"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </StackPanel>
+      </TabItem>
+      <!-- Студенты -->
+      <TabItem Header="Студенты">
+        <StackPanel Margin="10">
+          <Button Content="Добавить студента"
+                  Width="140"
+                  Command="{Binding AddStudentCommand}"/>
+          <DataGrid ItemsSource="{Binding Students}"
+                    AutoGenerateColumns="False"
+                    Margin="0,10,0,0"
+                    IsReadOnly="True">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
+              <DataGridTextColumn Header="Группа" Binding="{Binding GroupName}"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </StackPanel>
+      </TabItem>
+      <!-- Выдача/возврат -->
+      <TabItem Header="Выдача/Возврат">
+        <StackPanel Margin="10">
+          <TextBlock Text="Выдать книгу:" FontWeight="Bold"/>
+          <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+            <ComboBox ItemsSource="{Binding Books}"
+                      SelectedItem="{Binding SelectedBook}"
+                      DisplayMemberPath="Title"
+                      Width="200"/>
+            <ComboBox ItemsSource="{Binding Students}"
+                      SelectedItem="{Binding SelectedStudent}"
+                      DisplayMemberPath="FullName"
+                      Width="200"
+                      Margin="10,0,0,0"/>
+            <Button Content="Выдать"
+                    Command="{Binding IssueBookCommand}"
+                    Margin="10,0,0,0"/>
+          </StackPanel>
+
+          <TextBlock Text="Список выданных:" FontWeight="Bold"/>
+          <DataGrid ItemsSource="{Binding Loans}"
+                    SelectedItem="{Binding SelectedLoan}"
+                    AutoGenerateColumns="False"
+                    Height="200">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Книга" Binding="{Binding Book.Title}"/>
+              <DataGridTextColumn Header="Студент" Binding="{Binding Student.FullName}"/>
+              <DataGridTextColumn Header="Выдана" Binding="{Binding IssueDate, StringFormat=d}"/>
+              <DataGridTextColumn Header="Срок" Binding="{Binding DueDate, StringFormat=d}"/>
+              <DataGridTextColumn Header="Возврат" Binding="{Binding ReturnDate, StringFormat=d}"/>
+            </DataGrid.Columns>
+          </DataGrid>
+          <Button Content="Принять возврат"
+                  Command="{Binding ReturnBookCommand}"
+                  Margin="0,10,0,0"/>
+        </StackPanel>
+      </TabItem>
+    </TabControl>
+  </Grid>
+</Window>
