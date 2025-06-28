@@ -1,20 +1,20 @@
 ﻿StudentLibraryWPF
 
 
-winexe
+exe
 C#
 .cs
-/Users/margaritaahmetova/4per/StudentLibraryWPF/StudentLibraryWPF/obj/Debug/net6.0-windows/
+C:\Users\walter\practic_cc\StudentLibraryWPF\obj\Debug\net6.0-windows\
 StudentLibraryWPF
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-/Users/margaritaahmetova/4per/StudentLibraryWPF/StudentLibraryWPF/App.xaml
-2-1197336512
+C:\Users\walter\practic_cc\StudentLibraryWPF\App.xaml
+4-863614524
 
-8-757961446
-2141208108465
-Resources/Style.xaml;Views/MainWindow.xaml;
+10-2050587820
+2141264114259
+resources\styles.xaml;Views\AddBookWindow.xaml;Views\AddStudentWindow.xaml;Views\MainWindow.xaml;
 
 False
 

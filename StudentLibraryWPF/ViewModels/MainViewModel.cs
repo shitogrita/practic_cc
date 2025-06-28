@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using StudentLibraryWPF.Data;
 using StudentLibraryWPF.Models;
+using StudentLibraryWPF.Views;
 
 namespace StudentLibraryWPF.ViewModels
 {
@@ -46,26 +47,29 @@ namespace StudentLibraryWPF.ViewModels
 
         private void AddBook()
         {
-            var book = new Book {
-                Title       = "Новая книга",
-                Author      = "Автор",
-                Year        = DateTime.Now.Year,
-                IsAvailable = true
-            };
-            _ctx.Books.Add(book);
-            _ctx.SaveChanges();
-            Books.Add(book);
+            var dlg = new AddBookWindow();
+            // указываем, чтобы окно было дочерним для главного (опционально):
+            dlg.Owner = Application.Current.MainWindow;
+            if (dlg.ShowDialog() == true)
+            {
+                var book = dlg.Book;
+                _ctx.Books.Add(book);
+                _ctx.SaveChanges();
+                Books.Add(book);
+            }
         }
 
         private void AddStudent()
         {
-            var st = new Student {
-                FullName  = "Ф.И.О. студента",
-                GroupName = "Группа"
-            };
-            _ctx.Students.Add(st);
-            _ctx.SaveChanges();
-            Students.Add(st);
+            var dlg = new AddStudentWindow();
+            dlg.Owner = Application.Current.MainWindow;
+            if (dlg.ShowDialog() == true)
+            {
+                var st = dlg.Student;
+                _ctx.Students.Add(st);
+                _ctx.SaveChanges();
+                Students.Add(st);
+            }
         }
 
         private bool CanIssue() =>
